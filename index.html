@@ -101,14 +101,17 @@
 }
 </style>
 <script>
-    function toggle(el) {
-      const all = document.querySelectorAll('.level');
-      all.forEach(div => {
-        if (div !== el) div.classList.remove("active");
-      });
-      el.classList.toggle("active");
-    }
-  </script>
+function toggle(el) {
+  const all = document.querySelectorAll('.level');
+  all.forEach(div => {
+    if (div !== el) div.classList.remove("active");
+  });
+  el.classList.toggle("active");
+  if (el.classList.contains("active")) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+</script>
 <link href="manifest.json" rel="manifest"/>
 <script>
     if ('serviceWorker' in navigator) {
