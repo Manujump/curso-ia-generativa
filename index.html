@@ -99,6 +99,47 @@
     font-size: 0.9em;
   }
 }
+
+#welcome-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('portada_burbuja.png') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 9999;
+  transition: opacity 1s ease;
+}
+#welcome-screen h1 {
+  color: #fff;
+  font-size: 2em;
+  text-shadow: 1px 1px 4px #000;
+}
+#welcome-screen p {
+  color: #ddd;
+  font-size: 1em;
+  margin-top: 10px;
+  text-shadow: 1px 1px 3px #000;
+}
+#welcome-screen button {
+  margin-top: 30px;
+  padding: 12px 24px;
+  font-size: 1.1em;
+  background: #4b2aad;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+#welcome-screen button:hover {
+  background: #3b228d;
+}
 </style>
 <script>
 function toggle(el) {
@@ -116,8 +157,16 @@ function toggle(el) {
       navigator.serviceWorker.register('service-worker.js');
     }
   </script>
-</head>
-<body>
+<script>
+function hideWelcome() {
+  const screen = document.getElementById('welcome-screen');
+  screen.style.opacity = '0';
+  setTimeout(() => {
+    screen.style.display = 'none';
+  }, 1000);
+}
+</script></head>
+<body><div id="welcome-screen"><h1>IA generativa para empresas</h1><p>Curso básico - Listo para aplicar - Creado con IA</p><button onClick="hideWelcome()">¡Entra!</button></div>
 <div class="overlay">
 <h1>IA Generativa: el primer paso para potenciar tu empresa</h1>
 <p class="subtitle">Modalidad: 100% online · 6 Módulos + BONUS · Duración estimada: entre 60 y 90 minutos</p>
