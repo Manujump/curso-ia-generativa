@@ -107,9 +107,7 @@ function toggle(el) {
     if (div !== el) div.classList.remove("active");
   });
   el.classList.toggle("active");
-  if (el.classList.contains("active")) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 </script>
 <link href="manifest.json" rel="manifest"/>
