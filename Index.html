@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Curso IA Generativa</title>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url('fondo.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      color: #333;
+    }
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.85);
+      margin: 60px auto;
+      padding: 40px;
+      max-width: 900px;
+      border-radius: 16px;
+    }
+    h1 {
+      color: #4b2aad;
+      text-align: center;
+    }
+    .subtitle {
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 30px;
+    }
+    .level {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 20px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .level h2 {
+      margin: 0;
+      cursor: pointer;
+      color: #4b2aad;
+    }
+    .content {
+      display: none;
+      padding-top: 15px;
+    }
+    .level.active .content {
+      display: block;
+    }
+    .subpoint {
+      margin-left: 20px;
+      font-size: 0.95em;
+      color: #555;
+      margin-top: 10px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 15px;
+    }
+    hr {
+      border: none;
+      height: 1px;
+      background: #ccc;
+      margin: 40px 0;
+    }
+    .quote {
+      font-family: 'Agency FB', sans-serif;
+      text-align: center;
+      color: #4b2aad;
+      font-weight: 300;
+      font-size: 1.3em;
+      margin: 40px 0 40px 0;
+    }
+  
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
+  .overlay {
+    width: 95%;
+    padding: 20px;
+    margin: 30px auto;
+  }
+  h1 {
+    font-size: 1.5em;
+    line-height: 1.2em;
+  }
+  .level h2 {
+    font-size: 1.1em;
+  }
+  .subpoint {
+    font-size: 0.9em;
+  }
+}
+
+#welcome-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('portada_burbuja.png') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 9999;
+  transition: opacity 1s ease;
+}
+#welcome-screen h1 {
+  color: #fff;
+  font-size: 2em;
+  text-shadow: 1px 1px 4px #000;
+}
+#welcome-screen p {
+  color: #ddd;
+  font-size: 1em;
+  margin-top: 10px;
+  text-shadow: 1px 1px 3px #000;
+}
+#welcome-screen button {
+  margin-top: 30px;
+  padding: 12px 24px;
+  font-size: 1.1em;
+  background: #4b2aad;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+#welcome-screen button:hover {
+  background: #3b228d;
+}
+
+#welcome-screen::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+.overlay {
+  max-width: 840px;
+  width: 92%;
+}
+
+#welcome-screen::before {
+  background: rgba(0, 0, 0, 0.85);  /* Subimos de 0.6 a 0.85 para oscurecer más */
+}
+
+#welcome-screen p {
+  max-width: 90%;
+  padding: 0 10px;
+  box-sizing: border-box;
+  line-height: 1.4em;
+}
+</style>
+
+<link href="manifest.json" rel="manifest"/>
+<script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+<script>
+function hideWelcome() {
+  const screen = document.getElementById('welcome-screen');
+  screen.style.opacity = '0';
+  setTimeout(() => {
+    screen.style.display = 'none';
+  }, 1000);
+}
+</script></head>
+<body><div id="welcome-screen"><h1>IA generativa para empresas</h1><p>Cada vez que usas IA con intención, afinas una habilidad que marca la diferencia.</p><button onclick="hideWelcome()">¡Entra!</button></div>
+<div class="overlay">
+<h1>IA Generativa: el primer paso para potenciar tu empresa</h1>
+<p class="subtitle">Modalidad: 100% online · 6 Módulos + BONUS · Duración estimada: entre 60 y 90 minutos</p>
+<hr/>
+<!-- Aquí empiezan los módulos generados -->
+<div class="level" onclick="toggle(this)">
+<h2>Módulo 1 – Qué es la IA generativa y cómo puede ayudarte en tu empresa</h2>
+<div class="content">
+<ul>
+<li><strong>¿Qué es la IA generativa?</strong><br/>
+<div class="subpoint">La inteligencia artificial generativa es una rama de la IA capaz de crear contenido original —como texto, imágenes, audio o incluso líneas de código— a partir de datos previos. A diferencia de otros sistemas que simplemente analizan o clasifican información, esta tecnología imita patrones aprendidos y los transforma en nuevas propuestas, ajustadas al contexto y a la instrucción que recibe. En lugar de repetir, crea. En lugar de buscar, genera. Y eso cambia por completo su utilidad en el entorno empresarial.</div>
+</li>
+<li><strong>¿Cómo funciona un modelo como ChatGPT?</strong><br/>
+<div class="subpoint">Imagina que estás terminando una frase y alguien muy inteligente completa lo que falta, pero basándose no solo en la lógica de las palabras, sino en millones de frases similares que ha leído antes. Eso es lo que hace ChatGPT. Su funcionamiento se basa en un principio simple pero poderoso: predecir la siguiente palabra. Para lograrlo, el modelo ha entrenado con grandes cantidades de texto y ha aprendido patrones de lenguaje, estructura y significado. No entiende el mundo como tú, pero sí domina los matices del lenguaje con una precisión sorprendente.</div>
+</li>
+<li><strong>¿Qué hay detrás de esta tecnología?</strong><br/>
+<div class="subpoint"><strong>Modelo:</strong> Es el “cerebro” de la IA, una red neuronal con millones (o incluso billones) de parámetros. Ha sido entrenado para reconocer patrones en el lenguaje y responder con sentido.</div>
+<div class="subpoint"><strong>Token:</strong> El lenguaje se divide en piezas pequeñas llamadas tokens. Un token puede ser una palabra, una sílaba o incluso una parte de una palabra. La IA no ve frases, ve cadenas de tokens, y eso le permite operar con eficiencia y precisión.</div>
+<div class="subpoint"><strong>Transformer:</strong> Es la arquitectura clave que revolucionó la IA. Permite que el modelo no solo vea la última palabra escrita, sino todo el contexto anterior. Gracias a los transformers, ChatGPT puede recordar lo que escribiste al principio de tu mensaje y responder con coherencia al final.</div>
+</li>
+</ul>
+<p class="quote">"La inteligencia artificial no reemplaza la creatividad humana; la amplifica."</p>
+<ul>
+<li><strong>¿Qué herramientas puedo usar en tu negocio?</strong><br/>
+<div class="subpoint"><strong>ChatGPT:</strong> Es la más popular y la más versátil. Desde redactar correos hasta generar ideas de negocio o responder clientes, su utilidad es inmediata. Además, permite personalizar el tono y el formato según lo que necesites. Es la herramienta que usarás durante este curso.</div>
+<div class="subpoint"><strong>Google Sheets + IA:</strong> Una combinación poderosa. Puedes conectar una hoja de cálculo con modelos de lenguaje como GPT para generar textos, analizar datos o redactar contenido automáticamente.</div>
+<div class="subpoint"><strong>Notion AI:</strong> Si tu empresa usa Notion para organizar información, esta herramienta te permite resumir notas, generar recordatorios, redactar archivos o planificar reuniones en segundos.</div>
+</li>
+<li><strong>Lo que debes tener en cuenta al usar IA en tu empresa</strong><br/>
+<div class="subpoint">Utilizar IA no es tener un robot que lo hace todo. Puede parecer que entiende, pero en realidad solo predice. Por eso, saber cómo guiarla (y revisar bien los resultados) es necesario si no queremos que cometa errores o se limite a resultados mediocres. Una IA no sustituye el criterio. Solo lo multiplica si ya lo tienes.</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="level" onclick="toggle(this)">
+<h2>Módulo 2 – Cómo usar PROMPTS para que la IA trabaje contigo</h2>
+<div class="content">
+<ul>
+<li><strong>¿Qué es un prompt?</strong><br/>
+<div class="subpoint">Un prompt es el mensaje o instrucción que escribes para que la IA genere una respuesta. Es lo que activa su capacidad de ayudarte. Y cuanto mejor lo hagas, más útil será la respuesta.</div>
+</li>
+<li><strong>¿Qué tipo de instrucciones puedes darle?</strong><br/>
+<div class="subpoint">Puedes pedirle que te ayude a redactar, resumir, analizar, adaptar textos a diferentes públicos o generar ideas. Lo importante es hablarle como si fuese una persona con mucho conocimiento… pero sin contexto. Necesita que le digas qué, cómo y para quién.</div>
+</li>
+</ul>
+<p class="quote">"La IA responde según lo que entiende. Y lo que entiende, depende de lo que pides."</p>
+<ul>
+<li><strong>¿Cómo funciona un buen prompt?</strong><br/>
+<div class="subpoint">Un buen prompt incluye el objetivo, el tipo de resultado, el tono y el público. Ejemplo: “Resume este correo para un cliente que no es técnico, usando un tono cercano.”</div>
+</li>
+<li><strong>¿Y si quiero cambiar o mejorar la respuesta?</strong><br/>
+<div class="subpoint">No necesitas rehacer todo el prompt. Puedes usar frases sencillas para afinar la respuesta directamente. Hazlo como si le hablases a un humano y sorpréndete:</div>
+<div class="subpoint">- “Hazlo más directo”<br/>- “Usa ejemplos reales”<br/>- “Simplifícalo para alguien que no sepa del tema”</div>
+</li>
+<li><strong>¿Por qué esto marca la diferencia?</strong><br/>
+<div class="subpoint">Estas frases convierten una respuesta mediocre en una respuesta útil, sin tener que empezar de nuevo. Pensar en la IA como una conversación en progreso, no como una máquina de respuestas cerradas, marca la diferencia.</div>
+</li>
+<li><strong>¿Qué más puedes hacer?</strong><br/>
+<div class="subpoint">Además de dar una orden, puedes estructurar todo el contexto: ejemplos, formato deseado, longitud, público objetivo. Cuanto más precisa es la guía, mejor será el resultado.</div>
+</li>
+</ul>
+<p class="quote">"Hablar con una IA no es como hablar con una persona, pero cuanto mejor te comuniques, más "humano" se volverá."</p>
+<ul>
+<li><strong>¿Y por qué esto es solo el principio?</strong><br/>
+<div class="subpoint">Este curso básico te dará las claves esenciales. Pero dominar los prompts es una habilidad que se debe entrenar y afinar mucho más… y cuanto más afines, más potente será tu asistente de IA.</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="level" onclick="toggle(this)">
+<h2>Módulo 3 – Errores comunes y cómo evitarlos</h2>
+<div class="content">
+<ul>
+<li><strong>1. Pensar que la IA entiende lo que dices</strong><br/>
+<div class="subpoint">La IA no entiende. Predice. Funciona como un autocompletado muy avanzado. Si le pides algo poco claro, no te pedirá explicaciones. Simplemente te devolverá lo más probable… aunque no sea lo más útil.</div>
+</li>
+<li><strong>2. Usar instrucciones demasiado vagas</strong><br/>
+<div class="subpoint">“Haz un resumen” no es lo mismo que “Resume esto para un cliente que no es técnico, en tono cercano, en menos de 100 palabras”. Si tu prompt es genérico, el resultado también lo será.</div>
+</li>
+<p class="quote">"La IA no adivina lo que quieres. Solo te devuelve lo que pediste… aunque no se parezca en nada a lo que necesitabas."</p>
+<li><strong>3. Creer que todo lo que dice es cierto</strong><br/>
+<div class="subpoint">La IA puede inventar datos, mezclar fuentes o afirmar cosas con total seguridad… aunque no sean reales. No contrasta. No verifica. Si tiene que rellenar huecos, lo hará, aunque sea con errores.</div>
+</li>
+<li><strong>4. Creer que solo sirve para textos</strong><br/>
+<div class="subpoint">También puedes usarla para resumir ideas, estructurar propuestas, generar versiones de un mensaje, simular perfiles de cliente, crear tablas comparativas o ayudarte a organizar tareas.</div>
+</li>
+<li><strong>5. No revisar antes de usar</strong><br/>
+<div class="subpoint">Aunque el texto parezca correcto, puede tener omisiones o errores sutiles. La IA no valida ni verifica: solo predice. No uses nada sin leerlo con ojos humanos.</div>
+</li>
+<li><strong>6. No pedir mejoras</strong><br/>
+<div class="subpoint">No necesitas rehacer todo el mensaje. Puedes usar frases simples como: “hazlo más claro”, “usa otro ejemplo”, “escribe como si fuera para niños” o “resume esto en 3 frases”.</div>
+</li>
+<li><strong>7. No pensar en la IA como un diálogo</strong><br/>
+<div class="subpoint">Estas frases convierten una respuesta mediocre en una respuesta útil, sin tener que empezar de nuevo. Pensar en la IA como una conversación en progreso, no como una máquina de respuestas cerradas, marca la diferencia.</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="level" onclick="toggle(this)">
+<h2>Módulo 4 – Afinar, resumir y reescribir con IA</h2>
+<div class="content">
+<ul>
+<li><strong>1. Afina una idea, sin empezar de cero</strong><br/>
+<div class="subpoint">A veces tienes una frase que “casi” te gusta. Puedes pedirle que te dé otra versión con tono más directo, más profesional o más cercano… sin perder tu idea base.</div>
+</li>
+<p class="quote">"La IA no mejora por ti. Mejora contigo. Cuanto más aportas tú, más fino es el resultado."</p>
+<li><strong>2. Resumir sin perder el sentido</strong><br/>
+<div class="subpoint">Cuando un texto es largo, no siempre necesitas leerlo todo. Puedes pedir un resumen con un enfoque específico. Ejemplo: “Resume esto como si fuera para explicar en una reunión”.</div>
+</li>
+<li><strong>3. Cambiar el enfoque de un texto</strong><br/>
+<div class="subpoint">¿Tienes un mensaje serio que quieres volver más cercano? ¿Una explicación técnica que quieres adaptar a un cliente sin conocimientos? No reescribas: transforma.</div>
+</li>
+<li><strong>4. Crear versiones de un mismo mensaje</strong><br/>
+<div class="subpoint">Puedes pedir 3 opciones del mismo mensaje, cada una con diferente tono: más formal, más directo, más emocional… y elegir la que mejor encaje.</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="level" onclick="toggle(this)">
+<h2>Módulo 5 – La potencia de la IA: descubre cuál impulsa tu negocio</h2>
+<div class="content">
+<ul>
+<li><strong>1. Los 7 patrones de una IA</strong><br/>
+<div class="subpoint">Aunque parezca mágica, una IA sigue patrones. Aprender a reconocerlos te permite anticipar cómo responderá.</div>
+<div class="subpoint">1. Predicción: completa ideas a partir del contexto.<br/>2. Asociación: conecta conceptos relacionados.<br/>3. Reescritura: transforma el mismo contenido con distinto enfoque.<br/>4. Expansión: desarrolla algo breve en algo más amplio.<br/>5. Reducción: resume sin perder el sentido.<br/>6. Clasificación: identifica tono, intención, nivel o tipo de texto.<br/>7. Simulación: responde como si fuera un perfil o personaje.</div>
+</li>
+<li><strong>2. Modelos preentrenados vs modelos personalizados</strong><br/>
+<div class="subpoint"><strong>Los modelos preentrenados</strong>, como ChatGPT, están diseñados para responder a una amplia variedad de temas. Funcionan bien en muchas tareas, pero no están adaptados a tus necesidades concretas. Sin embargo, puedes hacer que se adapten.</div>
+<div class="subpoint"><strong>Los modelos personalizados</strong> van un paso más allá. Toman ese mismo motor y lo afinan con tu lenguaje, tus procesos y tus objetivos. No necesitan saberlo todo: solo necesitan saber lo que es relevante para ti. Esto puede hacerse con entrenamiento adicional, ejemplos concretos o integraciones que conectan la IA con tu información real.</div>
+<p class="quote">Lo importante no es cuánto sabe el modelo… sino cuánto sabe sobre ti.</p>
+</li>
+<li><strong>3. IA tradicionales vs IA generativas</strong><br/>
+<div class="subpoint">Las IA tradicionales siguen reglas o clasifican información existente. Las generativas van más allá: producen contenido nuevo, adaptado al contexto. Es como pasar de una hoja de cálculo… a alguien que te la explica, te resume los puntos clave y te propone mejoras.</div>
+</li>
+<li><strong>4. Diferencias entre IA populares</strong><br/>
+<div class="subpoint"><strong>Gemini (Google):</strong> IA generativa de texto con fuerte integración en el ecosistema Google. Es algo limitada con instrucciones complejas.</div>
+<div class="subpoint"><strong>Copilot (Microsoft):</strong> Ideal para entornos de oficina. Se integra con Excel, Word y Outlook. Aporta mucho valor si ya usas sus herramientas.</div>
+<div class="subpoint"><strong>ChatGPT (OpenAI):</strong> Versátil, adaptable y con memoria opcional. Potente tanto para tareas creativas como técnicas. Es la IA más flexible del mercado.</div>
+<div class="subpoint"><strong>Grok (X/Twitter):</strong> Orientada a información de actualidad. Usa datos del momento y es útil en entornos sociales o dinámicos.</div>
+<div class="subpoint"><strong>Whisper (OpenAI):</strong> No genera texto, pero lo transforma. Transcribe audio a texto con alta precisión.</div>
+<div class="subpoint"><strong>DALL·E (OpenAI):</strong> Genera imágenes a partir de texto. Útil para ideas visuales rápidas o creativas.</div>
+<div class="subpoint"><strong>Perplexity:</strong> Combina generación de texto con búsqueda real. Ideal para obtener respuestas basadas en fuentes verificadas.</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="level" onclick="toggle(this)">
+<h2>Módulo 6 – De la teoría a la práctica: aplica la IA desde hoy mismo</h2>
+<div class="content">
+<ul>
+<li><strong>1. Empieza por lo que ya haces</strong><br/>
+<div class="subpoint">No necesitas inventar una nueva forma de trabajar. Solo elige una tarea que ya haces cada semana: redactar correos, responder clientes, resumir documentos, organizar ideas.</div>
+<div class="subpoint"><strong>Prueba esto:</strong><br/>“Resume este email técnico para enviarlo a un cliente que no tiene conocimientos del sector.”</div>
+</li>
+<li><strong>2. Detecta puntos repetitivos o pesados</strong><br/>
+<div class="subpoint">¿Qué tarea te roba más tiempo o te resulta pesada? Eso es lo primero que deberías delegar parcialmente en IA.</div>
+<div class="subpoint"><strong>Ejemplos:</strong><br/>- Redactar siempre el mismo tipo de respuesta<br/>- Resumir informes largos<br/>- Hacer propuestas comerciales desde cero<br/>- Organizar ideas desordenadas</div>
+</li>
+<li><strong>3. Haz tu primera rutina asistida con IA</strong><br/>
+<div class="subpoint">El truco no está en pedirle todo, sino en integrarla como una parte de tu flujo habitual.</div>
+<div class="subpoint"><strong>Ejemplo básico:</strong><br/>1. Escribes un borrador rápido.<br/>2. Pides que lo mejore o resuma.<br/>3. Tú revisas y ajustas.<br/>→ Has trabajado más rápido, con menos carga y mejor resultado.</div>
+</li>
+<li><strong>4. Usa IA para preparar una semana real de trabajo</strong><br/>
+<div class="subpoint">La IA no solo sirve para tareas individuales. También puede ayudarte a organizar, planificar y visualizar tu semana.</div>
+<div class="subpoint"><strong>Prueba esto:</strong><br/>“Tengo estas tareas para la semana: redactar un presupuesto, preparar una reunión, responder 5 correos clave, crear 2 publicaciones de redes. Dame un plan organizado.”</div>
+<div class="subpoint">Empieza con lo que tienes. No hace falta que la IA lo haga todo. Basta con que te ayude a pensar con más claridad.</div>
+</li>
+<li><strong>5. Evalúa cómo ha cambiado tu forma de trabajar</strong><br/>
+<div class="subpoint">¿Has ahorrado tiempo? ¿Te ha quitado carga mental? ¿Has generado nuevas ideas? Escribe lo que has notado tras una semana usando IA, aunque sea solo en 1 o 2 tareas.</div>
+<div class="subpoint">No lo hagas para ti. Hazlo para tu “yo” de dentro de un mes.</div>
+</li>
+</ul>
+<p class="quote">"El primer paso con IA no es aprender más… es usarla una vez de verdad."</p>
+<p style="font-weight: bold; color: #4b2aad; margin-top: 40px; text-align: center;">
+  Has llegado al final de este curso… pero esto no es un punto final. Es un punto de partida.<br/><br/>
+  Porque ahora ya sabes lo esencial: qué es la IA generativa, cómo hablarle, cómo evitar errores y cómo convertirla en una herramienta real de trabajo.<br/><br/>
+  El siguiente paso ya no es aprender más. Es practicar, explorar y adaptar todo esto a tu mundo.<br/><br/>
+  Cada vez que uses IA con intención, estarás afinando una nueva habilidad que marcará la diferencia.<br/>
+  Y si en algún momento quieres ir más allá… nosotros también estaremos ahí.
+</p>
+</div>
+</div>
+<!-- Módulo BONUS corregido -->
+<div class="level" onclick="toggle(this)">
+<h2 style="text-align: center; color: white; -webkit-text-stroke: 0.6px black;">Módulo BONUS – ¿Y ahora qué? Claves según tu tipo de negocio</h2>
+<div class="content">
+<ul>
+<li style="margin-top: 25px;"><strong>Si eres autónomo</strong><br/>
+<div class="subpoint">Tienes poco tiempo, haces de todo, y necesitas que las cosas fluyan. La IA puede ayudarte más de lo que imaginas… pero solo si empiezas por lo sencillo.</div>
+<div class="subpoint">Empieza por una tarea que te cueste repetir o que te robe claridad. Haz una prueba. Observa cómo cambia el resultado. Y si te funciona una vez… probablemente te funcionará muchas más.</div>
+<div class="subpoint"><em>✅ Que la IA te ahorre 15 minutos al día ya es una inversión que vale la pena.</em></div>
+</li>
+<li style="margin-top: 25px;"><strong>Si tienes un pequeño negocio</strong><br/>
+<div class="subpoint">No se trata de usar IA para todo. Se trata de saber cuándo usarla bien.</div>
+<div class="subpoint">Piensa en los momentos del día donde más te bloqueas, más repites o más dudas. La IA no va a decidir por ti, pero puede darte el empujón que te falta.</div>
+<div class="subpoint"><em>✅ Cuanto más claro seas al pedir, mejor serán los resultados.</em></div>
+</li>
+<li style="margin-top: 25px;"><strong>Si gestionas un equipo</strong><br/>
+<div class="subpoint">No es solo tu tiempo: es el tiempo de todos.</div>
+<div class="subpoint">La IA puede ayudarte a unificar criterios, ahorrar pasos y mantener foco. Pero su mayor valor está en el efecto multiplicador: si una sola persona mejora su forma de trabajar con IA… imagina un equipo entero.</div>
+<div class="subpoint"><em>✅ No se trata de automatizar personas. Se trata de liberar talento.</em></div>
+</li>
+</ul>
+<p style="font-weight: bold; color: #4b2aad; margin-top: 40px; text-align: center;">
+          Has llegado al final de este curso, pero eso no significa que sea el final de tu camino con la IA.<br/><br/>
+          Lo importante no es cuántas herramientas conozcas… sino cómo decides aplicarlas.<br/><br/>
+<em>Empieza por una tarea. Obsérvala. Mejórala. Y luego, si quieres… te enseño cómo escalarlo.</em>
+</p>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const levels = document.querySelectorAll(".level");
+  levels.forEach(el => {
+    el.addEventListener("click", function () {
+      levels.forEach(div => {
+        if (div !== el) div.classList.remove("active");
+      });
+      el.classList.toggle("active");
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+});
+</script></body>
+</html>
