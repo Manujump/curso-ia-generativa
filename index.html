@@ -174,7 +174,16 @@ body > .overlay {
   z-index: 1;
 }
 </style>
-
+<script>
+function toggle(el) {
+  const all = document.querySelectorAll('.level');
+  all.forEach(div => {
+    if (div !== el) div.classList.remove("active");
+  });
+  el.classList.toggle("active");
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+</script>
 <link href="manifest.json" rel="manifest"/>
 <script>
     if ('serviceWorker' in navigator) {
@@ -402,18 +411,5 @@ function hideWelcome() {
 </div>
 </div>
 </div>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const modules = document.querySelectorAll('.level');
-  modules.forEach(mod => {
-    mod.addEventListener('click', function () {
-      modules.forEach(m => {
-        if (m !== mod) m.classList.remove("active");
-      });
-      mod.classList.toggle("active");
-      mod.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
-});
-</script></body>
+</body>
 </html>
